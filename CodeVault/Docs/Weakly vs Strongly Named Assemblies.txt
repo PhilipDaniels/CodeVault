@@ -1,0 +1,132 @@
+Weak vs Strong
+==============
+Richter, p67.
+
+Weak and strong assemblies are structurally identical.
+A strongly named assembly is signed with a publisher's
+public/private key pair which uniquely identifies the
+publisher.
+
+
+Kind       Private deploy?    Global deploy?
+--------------------------------------------
+Weak	   Yes		      No
+Strong	   Yes		      Yes
+
+Private deploy = in your app dir or one of its subdirs
+Global deploy = in a well-known location (ie the GAC)
+
+
+Naming an assembly
+==================
+Richter, p68
+
+The assembly identity (aka display) name
+
+  "MyTypes, Version=1.0.8123.0, Culture=Neutral, PublicKeyToken=b77a5c561934e089"
+
+You can display this using Reflector.
+
+MyTypes is	set on the properties page, and determines the name of the EXE or DLL.
+Version is	[assembly: AssemblyVersion("1.0.0.0")]
+Culture is	[assembly: AssemblyCulture("")]
+
+
+How To Make A Strongly Named Assembly
+=====================================
+Visual Studio Method
+--------------------
+Project properties -> Signing
+  If you have a key file for your company you can select it,
+  otherwise you can create a new one.
+
+
+Command line method
+-------------------
+Create a binary file containing your key pair
+    sn -k PD.Keys
+[Optional: examine the public key]
+    sn -p PD.Keys PD.PublicKey
+    sn -tp PD.PublicKey
+Compile your assembly along with the key file
+[only the file that contains the manifest, other files can't be signed]
+    csc /keyfile:PD.Keys MyApp.cs
+
+
+Delayed Signing
+---------------
+See Richter p82.
+
+
+Deploying To The GAC
+====================
+Richter p84.
+
+Usually C:\Windows\Assembly. Never copy files in manually.
+Using private deployment is preferred! Much easier to maintain. GAC deployment
+only really makes sense for assemblies that will be shared by many programs.
+GACUtil.exe is a developer tool, it is not part of the .Net Framework download.
+MSI can install assemblies into the GAC. This will be on the user's machine.
+
+GACUtil /i MyAssembly.exe
+GACUtil /i MyAssembly.dll 
+GACUtil /i myDll.dll /r FILEPATH c:\projects\myapp.exe "My App"
+  /r integrates with Add/Remove programs
+GACUtil /u MyAssembly
+  /u can also specify version, culture and public key token (which you
+     can get from reflector)
+
+
+
+
+Does The Assembly Have A Strong Name?
+=====================================
+If you examine the assembly with ILDASM.exe, you can see whether the assembly
+is signed with a public key or not.
+
+
+******** Assembly with a public key:
+
+Assembly
+-------------------------------------------------------
+	Token: 0x20000001
+	Name : CLSCompliance
+	Public Key    : 00 24 00 00 04 80 00 00  94 00 00 00 06 02 00 00  00 24 00 00 52 53 41 31 
+                      : 00 04 00 00 01 00 01 00  ab 37 f7 26 25 5e 53 c2  22 05 4c 6b 31 95 84 af 
+                      : 96 30 a7 53 88 3b 98 29  7e 9e e2 69 65 e1 29 cc  c4 bb 33 b4 01 f2 87 ec 
+                      : 6a 7e a8 7f cd a5 ec c4  39 cd 12 aa 4a 98 de 41  a1 6b 42 38 9a d9 fa af 
+                      : 4c b9 ae 98 77 19 ff c5  4e 33 64 b0 81 f0 ff d2  d8 ed 9b 3d 4b 07 47 d5 
+                      : e9 0d 9e 1a 5c c2 bf 22  57 49 06 f0 e6 e3 ae c3  34 5b 56 86 e4 1b 36 b0 
+                      : 5e bd 41 18 07 3e e5 47  c5 ab bc 04 f8 ff d0 b2 
+	Hash Algorithm : 0x00008004
+	Version: 1.1.0.0
+	Major Version: 0x00000001
+	Minor Version: 0x00000001
+	Build Number: 0x00000000
+	Revision Number: 0x00000000
+	Locale: <null>
+	Flags : [PublicKey]  (00000001)
+	CustomAttribute #1 (0c000001)
+
+
+******** Assembly without a public key:
+
+
+Assembly
+-------------------------------------------------------
+	Token: 0x20000001
+	Name : Singleton
+	Public Key    :
+	Hash Algorithm : 0x00008004
+	Version: 1.0.0.0
+	Major Version: 0x00000001
+	Minor Version: 0x00000000
+	Build Number: 0x00000000
+	Revision Number: 0x00000000
+	Locale: <null>
+	Flags : [none] (00000000)
+	CustomAttribute #1 (0c000001)
+
+
+
+

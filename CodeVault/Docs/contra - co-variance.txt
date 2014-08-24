@@ -1,0 +1,14 @@
+Delegates
+=========
+Covariance: a method can return a type derived from the	delegate's return type
+Contravariance: A method can take a parameter that is a base of	the delegate's parameter type
+
+eg given a delegate
+
+	delegate object MyCallback(FileStream s);
+
+this is a legal delegate
+
+	string SomeMethod(Stream s);
+
+Contra- and co-variance are only supported for reference types.

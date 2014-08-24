@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>SQLScripts</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{c4572208-6122-4535-8598-db5e337529bd}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>SQLScripts</RootNamespace>
+    <AssemblyName>SQLScripts</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- VS10 without SP1 will not have VisualStudioVersion set, so do that here -->
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <!-- Default to the v10.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Admin" />
+    <Folder Include="Performance" />
+    <Folder Include="Querying" />
+    <Folder Include="Prototypes" />
+    <Folder Include="Jobs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Admin\TableSizesAndColumnInfo.sql" />
+    <None Include="Admin\ChangeLogicalFilename.sql" />
+    <None Include="Admin\CreateBackupAndRestore.sql" />
+    <None Include="Admin\Shrinking.sql" />
+    <None Include="Admin\LinkedServers.sql" />
+    <None Include="Performance\BufferCleaning.sql" />
+    <None Include="Admin\ListAllDatabaseFiles.sql" />
+    <None Include="Admin\ListLastDatabaseBackups.sql" />
+    <None Include="Querying\HavingClauses.sql" />
+    <None Include="Admin\ListIndexesWithMissingIncludeColumns.sql" />
+    <None Include="Querying\HierarchyExample.sql" />
+    <None Include="Querying\GenerateMathematicalCombinations.sql" />
+    <None Include="Querying\DatesPartsThereof.sql" />
+    <None Include="Querying\DeleteDuplicatesExample.sql" />
+    <None Include="Querying\DisableConstraintsAndDeleteData.sql" />
+    <None Include="Querying\GenerateDatesUsingCrossJoin.sql" />
+    <None Include="Admin\ListPermissionsOfObjects.sql" />
+    <None Include="Prototypes\TVF.sql" />
+    <None Include="Querying\ForEachTable.sql" />
+    <None Include="Jobs\Starting.sql" />
+    <None Include="Querying\DatesPrintAllStyles.sql" />
+    <None Include="Admin\RelinkUsersToLogins.sql" />
+    <None Include="Querying\CursorSimpleTemplate.sql" />
+    <None Include="Admin\ProcSearch.sql" />
+    <None Include="Querying\ExecProcIntoTempTableWithoutKnowingColumns.sql" />
+    <None Include="Jobs\JobsReport.sql" />
+    <None Include="Querying\MergeExamples.sql" />
+    <None Include="Querying\CreatingDynamicSQLUsingReplace.sql" />
+    <None Include="Querying\StringConcatUsingStuff.sql" />
+    <None Include="Querying\StringSplit.sql" />
+    <None Include="Querying\StringConcatUsingPartitions.sql" />
+    <None Include="Querying\StringContactIntoVariable.sql" />
+    <None Include="Querying\ShredXmlUsingPrepareDocument.sql" />
+    <None Include="Querying\ShredXmlUsingXmlColumn.sql" />
+    <None Include="Querying\PivotExample.sql" />
+    <None Include="Querying\PagingExample.sql" />
+    <None Include="Prototypes\OverlappingDateRangePrevention.sql" />
+    <None Include="Admin\AnalyseTraceFile.sql" />
+  </ItemGroup>
+</Project>

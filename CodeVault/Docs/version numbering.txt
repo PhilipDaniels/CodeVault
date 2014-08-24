@@ -1,0 +1,17 @@
+Major.Minor.Build.Revision
+
+Build = a compilation
+Revision = a sub-compilation, eg if we had to build
+  twice in one day when we normally do it once per day
+
+See Richter p57 for the difference between the 3 different
+version numbers.
+
+[assembly: AssemblyVersion("1.0.0.0")]   <<<< this is the important one
+[assembly: AssemblyInformationalVersion("1.0.0.0")]   <<<< for info
+[assembly: AssemblyFileVersion("1.0.0.0")]    <<<< for info
+
+You should set AssemblyVersion by hand when you create a new assembly
+or a new version of the assembly.
+
+
