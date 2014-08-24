@@ -1,5 +1,5 @@
 ﻿
-CREATE PROCEDURE [ADM].[adm_ProcSearch]
+CREATE PROCEDURE #adm_ProcSearch
 	@cSearch1	VarChar(255)
 	,@cSearch2	VarChar(255) = ''
 	,@cSearch3	varchar(255) = ''
