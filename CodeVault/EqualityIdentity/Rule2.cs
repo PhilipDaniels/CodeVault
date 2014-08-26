@@ -47,6 +47,14 @@ namespace EqualityIdentity {
             return !(lhs == rhs);
         }
         #endregion
+
+        public override int GetHashCode()
+        {
+            var h = new SpookilySharp.SpookyHash();
+            h.Update(m_Int);
+            h.Update(m_String);
+            return h.Final().GetHashCode();
+        }
     }
 
     // OK, this is a derived class.
@@ -88,5 +96,13 @@ namespace EqualityIdentity {
             return !(lhs == rhs);
         }
         #endregion
+
+        public override int GetHashCode()
+        {
+            var h = new SpookilySharp.SpookyHash();
+            h.Update(m_SecondInt);
+            h.Update(base.GetHashCode());
+            return h.Final().GetHashCode();
+        }
     }
 }
