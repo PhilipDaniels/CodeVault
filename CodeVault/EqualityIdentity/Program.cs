@@ -14,6 +14,10 @@ using System.Diagnostics;
 // 4. Call the base class's Equals method so it can compare any fields defined by it. If the base
 //    class's Equals method returns false, return false; otherwise return true.
 
+// And the extra rule...when overriding Equals you also should override GetHashCode.
+// See http://stackoverflow.com/questions/263400/what-is-the-best-algorithm-for-an-overridden-system-object-gethashcode
+
+// SpookyHash looks good and is available on NuGet.
 
 namespace EqualityIdentity {
     class Program {
