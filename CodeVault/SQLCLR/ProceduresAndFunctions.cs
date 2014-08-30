@@ -9,14 +9,21 @@ namespace SQLCLR
 {
     public static class ProceduresAndFunctions
     {
+        // TODO
+        //string MultiReplace(SqlString inputString, IDictionary<string, object> replacements);
+        //
+
         /// <summary>
         /// An example of how to log a message. This will be done on a separate connection, so that
         /// if the main transaction is rolled back the message will remain.
         /// </summary>
+        /// <remarks>
+        /// Notice how we use Sql* types, as they collate properly and do nullability correctly.
+        /// </remarks>
         /// <param name="message">The message.</param>
         /// <param name="numRows">Extra information: Number of rows affected by something.</param>
         [SqlProcedure]
-        public static void LogMsg(string message, int? numRows)
+        public static void LogMsg(SqlString message, SqlInt32 numRows)
         {
             using (var conn = new SqlConnection(GetConnectionString()))
             using (var cmd = conn.CreateCommand())
@@ -24,12 +31,12 @@ namespace SQLCLR
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "dbo.MyLogProc";
 
-                if (String.IsNullOrWhiteSpace(message))
+                if (message.IsNull)
                     cmd.Parameters.AddWithValue("@message", DBNull.Value);
                 else
                     cmd.Parameters.AddWithValue("@message", message);
 
-                if (numRows == null)
+                if (numRows.IsNull)
                     cmd.Parameters.AddWithValue("@NumRows", DBNull.Value);
                 else
                     cmd.Parameters.AddWithValue("@NumRows", numRows);

@@ -17,7 +17,7 @@ GO
 
 
 -- Error: System.Security.SecurityException: Request for the permission of type 'System.Data.SqlClient.SqlClientPermission
--- Fix: alter database YourDatabaseName set trustworthy on
+-- Fix: alter database PD set trustworthy on
 
 -- Error: The database owner SID recorded in the master database differs from the database owner SID recorded in database 'YourDatabaseName'.
 -- You should correct this situation by resetting the owner of database 'YourDatabaseName' using the ALTER AUTHORIZATION statement.
@@ -37,7 +37,7 @@ EXEC(@Command)
 
 -- TODO: Set the name of the database that you want to install into.
 go
-use YourDatabaseName
+use PD
 go
 
 -- TODO Where is the assembly? These are server-side paths. You can use UNC names as well, which can simplify things.
@@ -51,7 +51,7 @@ print 'The assembly in ''' + @AssemblyObject + ''' will be (re)created with a na
 
 -- First drop any procs and functions from the assembly, then drop the assembly itself.
 declare CSR cursor for
-select
+select distinct
 	C.name as [ObjectName], C.type
 	from Sys.Assemblies A
 		join SYS.ASSEMBLY_MODULES B on a.assembly_id=B.assembly_id
@@ -61,8 +61,11 @@ open CSR
 
 fetch next from CSR Into @objName, @objType
 while @@FETCH_STATUS = 0 begin
-	If @objType = 'PC' select @sql = 'drop procedure ' + @objName
-	If @objType = 'FS' select @sql = 'drop function ' + @objName
+	--print @objType 
+	if @objType = 'PC' set @sql = 'drop procedure ' + @objName		-- Proc.
+	if @objType = 'AF' set @sql = 'drop aggregate ' + @objName		-- Aggregate function.
+	if @objType = 'FT' set @sql = 'drop function ' + @objName		-- TVF.
+	if @objType = 'FS' set @sql = 'drop function ' + @objName		-- Scalar function.
 	print @sql
 	exec (@sql)
 	fetch next from CSR into @objName, @objType
@@ -109,13 +112,24 @@ with execute as caller
 as external name [SQLCLR].[SQLCLR.ProceduresAndFunctions].[LogMsg];
 go
 
-CREATE FUNCTION dbo.SplitStrings
+
+CREATE FUNCTION dbo.SplitString
 (
    @List NVARCHAR(MAX),
    @Delimiter NVARCHAR(255)
 )
 RETURNS TABLE (Item NVARCHAR(4000))
 EXTERNAL NAME [SQLCLR].[SQLCLR.ProceduresAndFunctions].[SplitString_Multi];
+go
+
+CREATE AGGREGATE dbo.Concat
+( 
+	@Value NVARCHAR(MAX),
+	@Delimiter NVARCHAR(4000) 
+)
+RETURNS NVARCHAR(MAX) 
+EXTERNAL NAME [SQLCLR].[SQLCLR.Concat];
+go
 
 -- =============================================================================================
 /*
@@ -124,4 +138,14 @@ EXTERNAL NAME [SQLCLR].[SQLCLR.ProceduresAndFunctions].[SplitString_Multi];
 begin tran
 exec dbo.LogToTable 'pd test'
 rollback
+
+select dbo.Concat(s, ',') from (values ('a'), ('b'), ('a')) x(s)
+select dbo.Concat(distinct s, ',') from (values ('a'), ('b'), ('a')) x(s)
+
+select table_schema, PD.dbo.concat(TABLE_NAME, ', ') Tables
+from information_schema.tables
+group by table_schema
+
+select * from dbo.SplitString('hello,world,again', ',')
+
 */

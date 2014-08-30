@@ -102,5 +102,6 @@
     <None Include="Querying\PagingExample.sql" />
     <None Include="Prototypes\OverlappingDateRangePrevention.sql" />
     <None Include="Admin\AnalyseTraceFile.sql" />
+    <None Include="Admin\ProcSearchBySimpleQuery.sql" />
   </ItemGroup>
 </Project>
