@@ -103,5 +103,7 @@
     <None Include="Prototypes\OverlappingDateRangePrevention.sql" />
     <None Include="Admin\AnalyseTraceFile.sql" />
     <None Include="Admin\ProcSearchBySimpleQuery.sql" />
+    <None Include="Querying\CommentExample.sql" />
+    <None Include="Admin\Constraints.sql" />
   </ItemGroup>
 </Project>

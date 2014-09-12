@@ -13,6 +13,8 @@ on T.ID_AccountType = S.ID_AccountType
 when not matched by target then
 	insert (ID_AccountType, Name, Description)
 	values (S.ID_AccountType, S.Name, S.Description)
+when not matched by source then
+	delete
 when matched then
 	update set
 		T.Name = S.Name,
