@@ -83,6 +83,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SQLScripts", "SQLScripts\SQ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLCLR", "SQLCLR\SQLCLR.csproj", "{00F4E5B3-C232-4760-9E89-35F13086BA21}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLTVPs", "SQLTVPs\SQLTVPs.csproj", "{55900DB5-CAF3-43C8-B42B-FA19BDB72BCD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -227,6 +229,10 @@ Global
 		{00F4E5B3-C232-4760-9E89-35F13086BA21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00F4E5B3-C232-4760-9E89-35F13086BA21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00F4E5B3-C232-4760-9E89-35F13086BA21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55900DB5-CAF3-43C8-B42B-FA19BDB72BCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55900DB5-CAF3-43C8-B42B-FA19BDB72BCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55900DB5-CAF3-43C8-B42B-FA19BDB72BCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55900DB5-CAF3-43C8-B42B-FA19BDB72BCD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

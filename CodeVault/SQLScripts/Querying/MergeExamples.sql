@@ -1,4 +1,5 @@
-﻿-- ========================================================================
+﻿
+-- ========================================================================
 -- Example 1. Nice and simple.
 merge into dbo.AccountType as T
 using
@@ -9,16 +10,40 @@ using
 	) 
 as S(ID_AccountType, Name, Description)
 on T.ID_AccountType = S.ID_AccountType
-when not matched then
+when not matched by target then
 	insert (ID_AccountType, Name, Description)
 	values (S.ID_AccountType, S.Name, S.Description)
+when not matched by source then
+	delete
 when matched then
 	update set
 		T.Name = S.Name,
 		T.Description = S.Description;
 
+
 -- ========================================================================
--- Example 2.
+-- Example 2, from MSDN: http://technet.microsoft.com/en-us/library/bb522522(v=sql.105).aspx
+USE tempdb;
+GO
+BEGIN TRAN;
+MERGE Target AS T
+USING Source AS S
+ON (T.EmployeeID = S.EmployeeID) 
+WHEN NOT MATCHED BY TARGET AND S.EmployeeName LIKE 'S%' 
+    THEN INSERT(EmployeeID, EmployeeName) VALUES(S.EmployeeID, S.EmployeeName)
+WHEN MATCHED 
+    THEN UPDATE SET T.EmployeeName = S.EmployeeName
+WHEN NOT MATCHED BY SOURCE AND T.EmployeeName LIKE 'S%'
+    THEN DELETE 
+OUTPUT $action, inserted.*, deleted.*;
+ROLLBACK TRAN;
+
+-- When both these clauses are used then a full outer join is performed.
+--    WHEN NOT MATCHED BY TARGET THEN INSERT
+--    WHEN NOT MATCHED BY SOURCE THEN DELETE
+
+-- ========================================================================
+-- Example 3.
 
 
 merge into SAP.ASRForecasts as T

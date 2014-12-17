@@ -25,3 +25,13 @@ FROM
 			AND H.dtRateStart = SQ.dtRateStart
 			-- Keep one row.
 			AND H.nFakeID < SQ.nFakeID_KEEP
+
+
+-- And a much simpler example of delete duplicates. Untested for efficiency.
+;with cte as
+	(
+	select *, row_number() over (partition by Name order by Id asc) as RowRank
+	from #foo
+	)
+--select * from cte order by RowRank
+delete from cte where RowRank > 1

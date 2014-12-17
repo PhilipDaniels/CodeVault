@@ -1,7 +1,8 @@
 ﻿declare
 	@DbName varchar(128),
 	@SQL nvarchar(max),
-	@OriginalSQL nvarchar(max);
+	@OriginalSQL nvarchar(max),
+	@WantViewsInColumnInfo bit = 0;
 
 declare
 	@Databases table(Name varchar(128) primary key);
@@ -221,6 +222,7 @@ select * from @TableSize order by ReservedKB desc;
 
 declare @ColumnInfo Table
 	(
+	TABLE_TYPE nvarchar(128),
 	TABLE_CATALOG nvarchar(128),
 	TABLE_SCHEMA nvarchar(128),
 	TABLE_NAME nvarchar(128),
@@ -246,7 +248,14 @@ declare @ColumnInfo Table
 	DOMAIN_NAME nvarchar(128)
 	);
 
-set @OriginalSQL = 'select * from ??DbName??.INFORMATION_SCHEMA.COLUMNS'
+set @OriginalSQL = 'select T.TABLE_TYPE, C.* from ??DbName??.INFORMATION_SCHEMA.COLUMNS C JOIN ??DbName??.INFORMATION_SCHEMA.TABLES T
+	on C.TABLE_CATALOG = T.TABLE_CATALOG
+	and C.TABLE_SCHEMA = T.TABLE_SCHEMA
+	and C.TABLE_NAME = T.TABLE_NAME'
+
+if @WantViewsInColumnInfo = 0 begin
+	set @OriginalSQL = @OriginalSQL + ' and T.TABLE_TYPE = ''BASE TABLE'''
+end
 
 
 declare curDatabases cursor local static for select Name from @Databases
@@ -259,6 +268,7 @@ while 1 = 1 begin
 
 	insert into @ColumnInfo
 		(
+		TABLE_TYPE,
 		TABLE_CATALOG,
 		TABLE_SCHEMA,
 		TABLE_NAME,
@@ -289,5 +299,6 @@ end
 close curDatabases
 deallocate curDatabases
 
-select * from @ColumnInfo order by TABLE_CATALOG, TABLE_SCHEMA, TABLE_NAME, ORDINAL_POSITION;
+select * from @ColumnInfo 
+order by TABLE_CATALOG, TABLE_SCHEMA, TABLE_NAME, ORDINAL_POSITION;
 

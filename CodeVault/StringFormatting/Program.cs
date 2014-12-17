@@ -90,12 +90,14 @@ namespace StringFormatting {
             // yyyy = year as 4 digits
             // yy = year as 2 digits
             // MM = month as 2 digits
+            // MMM = month as 3 character abbreviation
             // dd = day as 2 digits
 
             // hh = hour as 2 digits, range 1-12. HH = hour as 2 digits, range 0-23.
             // mm = minute as 2 digits
             // ss = seconds as 2 digits
-            
+
+            Console.WriteLine("{0:yyyy/MMM/dd hh:mm:ss}", bday);
             Console.WriteLine("{0:yyyy/MM/dd hh:mm:ss}", bday);
 
             // Note that to get a backslash to appear it takes a double escape - once to escape

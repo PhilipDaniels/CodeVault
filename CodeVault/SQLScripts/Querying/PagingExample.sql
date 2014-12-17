@@ -1,4 +1,15 @@
-﻿/*
+﻿
+-- In SQL 2012 it is much easier.
+select *
+from sys.objects
+order by object_id
+offset 10 rows				-- Skip 10 rows.
+fetch next 15 rows only		-- And fetch 15 rows. This is optional, without it all remaining rows will be fetched.
+
+
+
+
+/*
 declare 
     @page_size INT = 20
     , @page_num INT = 20
@@ -110,3 +121,4 @@ BEGIN
     ORDER BY rn ASC 
 
 END
+

@@ -102,5 +102,13 @@
     <None Include="Querying\PagingExample.sql" />
     <None Include="Prototypes\OverlappingDateRangePrevention.sql" />
     <None Include="Admin\AnalyseTraceFile.sql" />
+    <None Include="Admin\ProcSearchBySimpleQuery.sql" />
+    <None Include="Querying\CommentExample.sql" />
+    <None Include="Admin\Constraints.sql" />
+    <None Include="Querying\Base64.sql" />
+    <None Include="Admin\Diagramming - foreign key count.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Querying\Safe SQL Object Creations.sql" />
   </ItemGroup>
 </Project>

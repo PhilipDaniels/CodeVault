@@ -1,7 +1,8 @@
 ﻿-- Print out all styles.
-DECLARE @Style int; SET @Style = 0
-DECLARE @Now datetime;  SET @Now = getdate()
-DECLARE @Message varchar(100)
+DECLARE
+	@Style int = 0,
+	@Now datetime = getdate(),
+	@Message varchar(100);
 
 WHILE @Style < 150 BEGIN
     BEGIN TRY
