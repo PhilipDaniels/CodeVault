@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Encodings", "Encodings\Encodings.csproj", "{F3BFF94A-4D43-47EE-AD7D-2F333A95A0D0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringFormatting", "StringFormatting\StringFormatting.csproj", "{2F623D33-2251-49C4-9FC3-A60BC942C623}"
@@ -84,6 +86,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLCLR", "SQLCLR\SQLCLR.csproj", "{00F4E5B3-C232-4760-9E89-35F13086BA21}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLTVPs", "SQLTVPs\SQLTVPs.csproj", "{55900DB5-CAF3-43C8-B42B-FA19BDB72BCD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OldMiscUtils", "OldMiscUtils\OldMiscUtils.csproj", "{C65F74CB-73C6-4172-A290-D7A297B48B9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -233,6 +237,10 @@ Global
 		{55900DB5-CAF3-43C8-B42B-FA19BDB72BCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55900DB5-CAF3-43C8-B42B-FA19BDB72BCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55900DB5-CAF3-43C8-B42B-FA19BDB72BCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C65F74CB-73C6-4172-A290-D7A297B48B9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C65F74CB-73C6-4172-A290-D7A297B48B9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C65F74CB-73C6-4172-A290-D7A297B48B9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C65F74CB-73C6-4172-A290-D7A297B48B9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
