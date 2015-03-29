@@ -9,33 +9,66 @@ namespace OldMiscUtils
 {
     public class CursorKeeper : IDisposable
     {
-        Cursor originalCursor;
-        bool isDisposed = false;
+        Cursor OriginalCursor;
+        Control[] ControlsToDisable;
+        bool IsDisposed;
+
+        public CursorKeeper()
+            : this(Cursors.WaitCursor)
+        {
+        }
+
+        public CursorKeeper(params Control[] controlsToDisable)
+            : this(Cursors.WaitCursor, controlsToDisable)
+        {
+        }
 
         public CursorKeeper(Cursor newCursor)
+            : this(newCursor, null)
         {
-            originalCursor = Cursor.Current;
+        }
+
+        public CursorKeeper(Cursor newCursor, params Control[] controlsToDisable)
+        {
+            OriginalCursor = Cursor.Current;
             Cursor.Current = newCursor;
+            ControlsToDisable = controlsToDisable;
+            EnableControls(false);
         }
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!isDisposed)
+            if (!IsDisposed)
             {
                 if (disposing)
                 {
-                    Cursor.Current = originalCursor;
+                    Cursor.Current = OriginalCursor;
+                    EnableControls(true);
+                    ControlsToDisable = null;
                 }
             }
 
-            isDisposed = true;
+            IsDisposed = true;
         }
 
+        /// <summary>
+        /// Undoes the keep operation, restoring the original cursor
+        /// and re-enabling any controls that were disabled.
+        /// </summary>
         public void Dispose()
         {
             // Do not change this code.  Put cleanup code in Dispose(ByVal disposing As Boolean) above.
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        void EnableControls(bool enable)
+        {
+            if (ControlsToDisable != null)
+            {
+                foreach (var ctrl in ControlsToDisable)
+                    ctrl.Enabled = enable;
+            }
         }
     }
 }
