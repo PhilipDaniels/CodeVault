@@ -89,6 +89,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLTVPs", "SQLTVPs\SQLTVPs.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OldMiscUtils", "OldMiscUtils\OldMiscUtils.csproj", "{C65F74CB-73C6-4172-A290-D7A297B48B9A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncExamples", "AsyncExamples\AsyncExamples.csproj", "{15A24746-7E14-4442-B9F0-01CB7E4CB13C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -241,6 +243,10 @@ Global
 		{C65F74CB-73C6-4172-A290-D7A297B48B9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C65F74CB-73C6-4172-A290-D7A297B48B9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C65F74CB-73C6-4172-A290-D7A297B48B9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15A24746-7E14-4442-B9F0-01CB7E4CB13C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15A24746-7E14-4442-B9F0-01CB7E4CB13C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15A24746-7E14-4442-B9F0-01CB7E4CB13C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15A24746-7E14-4442-B9F0-01CB7E4CB13C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

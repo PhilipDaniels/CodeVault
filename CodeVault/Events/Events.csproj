@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CanonicalEvent.cs" />
     <Compile Include="Fax.cs" />
     <Compile Include="MailManager.cs" />
     <Compile Include="MailManager2.cs" />
